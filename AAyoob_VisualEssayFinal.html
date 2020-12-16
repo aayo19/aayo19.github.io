@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Waiting on "The Big One"</title>
+	<link href="https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+	<script src="https://unpkg.com/intersection-observer"></script>
+	<script src="https://unpkg.com/scrollama"></script>
+</head>
+<style type="text/css">
+	body, html {
+		top:0;
+		left:0;
+		margin:0;
+		font-family:'Roboto', sans-serif;
+	}
+	nav	{
+		background-color:white;
+		position:fixed;
+		width:100%;
+		display:flex;
+		justify-content: center;
+		align-items:center;
+		border-bottom:0.01em solid black;
+		z-index:100;
+	}
+	.title {
+		height:50vh;
+		color:#ffff;
+		background-color:#485a5c;
+/*		background-image:url('https://lh3.googleusercontent.com/proxy/pWVM73hRbPmjxUPWh6o315t1GeRxJYbp5pwFu62XnkEl7P4U8kSNSQVlbR7_hSb2qV6cW5684wOUNvOj_ggle5YGU9S_tiRMk0Q88E_CeIEtu40e9LX1');*/
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-position: center top;
+		background-size: auto 100%;
+	}
+	.title h1 {
+		font-size:5em;
+	}
+	.title h2 {
+		font-size:2em;
+		font-weight:400;
+	}
+	.header {
+		text-align:center;
+		display:flex;
+		justify-content:center;
+		align-items:center;
+		border:0.5em solid black;
+		padding:5% 1%;
+		animation: fadeIn 0.5s ease-in-out;
+	}
+	.header h1{
+		font-family:'Roboto', sans-serif;
+		font-weight:600;
+		margin:0;
+	}
+	.header h2 {
+		margin:0;
+	}
+	.sticky {
+		float:right;
+		top:25%;
+		position:sticky;
+		width:50%;
+		display:inline-flex;
+					background-color:white;
+	}
+	.leftside{
+		background-color:#485a5c;
+		color:white;
+		width: 30%;
+    	padding: 5% 10% 5% 5%;
+	}
+	.progressive{
+		width:100%;
+		display:block;
+		margin-bottom:100%!important;
+	}
+	.end {
+		margin-bottom:5%!important;
+	}
+	#counter {
+		width:100%;
+		font-size:10em;
+		text-align:center;
+		margin:0;
+		padding:0%;
+		line-height:1em;
+		font-weight: 800;
+    	letter-spacing: -0.05em;
+	}
+	#counter h2{
+		text-align:center;
+	}
+	.text {
+		margin:3%;
+		line-height:2em;
+		opacity:0;
+		margin-top:3%;
+		transition:0.5s ease-in-out;
+	}
+	.text h1 {
+		font-size:3em;
+		letter-spacing:-0.05em;
+		line-height:1em;
+		font-weight:600;
+		width:60%;
+	}
+	.text h2 {
+		font-weight:400;
+		font-size:1em;
+		font-style:italic;
+	}
+	.sticky h1 {
+		width:100%;
+		font-size:2.5em;
+	}
+	.sticky h2 {
+		font-size:1em;
+		text-transform:uppercase;
+		letter-spacing:0.1em;
+	}
+	.center_aligner {
+		overflow:none;
+		width:100%;
+		display:flex;
+		align-items:center;
+		justify-content:center;
+		margin:2% 0%;
+	}
+	iframe {
+		border:0.5em solid black;
+		width:900px;
+		height:500px;
+	}
+	.tableauPlaceholder{
+		width:50%;
+		z-index:0;
+	}
+	img{
+		text-align:center;
+		margin:0%;
+		display:inline-block;
+		border:0.1em solid black;
+	}
+	.caption {
+		font-size:.9em;
+		color:#666666;
+	}
+	.small {
+		width:55%;
+	}
+	.large {
+		width:80%;
+		display:block;
+	}
+	@keyframes fadeIn {
+		0%{
+			opacity:0;
+		}
+		100%{
+			opacity:1;
+		}
+	}
+	@media screen and (max-width:767px){
+		.sticky {
+	/*		bottom:0;*/
+			width:60%;
+			float:none;
+			margin:auto;
+			display:flex;
+			line-height:2em;
+		}
+		.sticky h1 {
+			font-size:2em;
+			line-height:2em;
+		}
+		.sticky h2 {
+			font-size:2em;
+		}
+		#counter {
+			font-size:5em;
+		}
+		.leftside {
+			width: 85%;
+    		padding: 5% 10% 5% 5%;
+		}
+		.small {
+			width:80%;
+		}
+		.title {
+			height:80vh;
+		}
+		.text h1 {
+			font-size:2em;
+			width:80%;
+		}
+		.text {
+			margin:10% 5%;
+		}
+		iframe {
+			height:300px;
+		}
+
+	}
+</style>
+<body>
+
+<!-- nav -->
+<nav>
+	<h3>Waiting on "The Big One"</h3>
+</nav>
+
+<!-- text -->
+<div class='header title step'>
+	<div class='aligner'>
+		<h1>Waiting on "The Big One"</h1>
+		<h2>The influence of earthquakes on one Californian's upbringing</h2>	
+	</div>
+</div>
+
+
+<div class='text'>
+	<h2>Amelia Ayoob</h2>	
+	I grew up in coastal Northern California, where adults talked amongst themselves about the inevitable “big one." To my kid ears, "the big one" would be a catastrophic earthquake that would doom us all, and it was really only a matter of time. My lived experience, however, consisted of only a few notable earthquakes interspersed with small tremors. This visual essay draws upon U.S. Geological Survey data, local academic and new sources, and personal experience to explore the physical and cultural influence of earthquakes in Humboldt County, California from 1993 to 2012. 
+</div>
+
+
+<div class='text'>
+	<h1>Northern California is one of the most seismically active regions in the U.S.</h1>
+<!-- image 1 -->
+<div class='center_aligner'>
+	<!-- change line 120 if you want to change the size of the image -->
+	<img class='large' src="TripleJunction.jpg"> 	
+</div>
+<!-- caption for image 1 -->
+<div class='center_aligner'>
+	<div class='caption'>"Most earthquakes occur at or near plate boundaries," and we have a lot of them. Source: <a href="http://www2.humboldt.edu/shakyground/">Living on Shakey Ground</a> </div>	
+
+</div>
+	My hometown is located near the Mendocino Triple Junction, the Gorda Plate, and the Cascadia Subduction Zone, making it susceptible to severly damaging quakes in the magnitude 7.0 - 9.0 range. Since Humboldt County is on the coast, tsunamis could also result from seismic activity both locally and as far away as Japan (other than that, it's a great place to live!). While the number of earthquakes could vary widely from month to month, they were a near constant presence. My dataset included earthquakes for nearly every month between 1993 and 2012.
+</div>
+
+<!-- tableau public -->
+<div class='center_aligner'>
+	<!-- insert tableau public embed link below this line--> 
+<div class='tableauPlaceholder' id='viz1607901017244' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Mo&#47;MonthlyCount-ReducedSize&#47;EarthquakeFrequency&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='MonthlyCount-ReducedSize&#47;EarthquakeFrequency' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Mo&#47;MonthlyCount-ReducedSize&#47;EarthquakeFrequency&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1607901017244');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='95%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='95%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} else { vizElement.style.width='95%';vizElement.style.height='727px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+</div>
+
+
+<!--Add the counters here: total number of earthquakes, Median per year, % offshore-->
+<!-- counter -->
+<div class='header sticky step' id='dynamic_sticky1'>
+</div>
+
+
+<div class='leftside'>
+
+	<div class='text progressive'>
+	<h1>Most years saw hundreds of earthquakes</h1>
+	We experienced an average 505 earthquakes per year (with a median of 419).
+	</div>
+
+	<div class='text progressive'>
+	<h1>Which accumulated into thousands</h1>
+	Annual totals ranged from 1,082 (in 1993) to 331 (in 2003) with a total 10,091 earthquakes recorded over the 19 years I lived in the area full time. 
+	</div>
+
+	<div class='text progressive end'>
+	<h1>Effects were not limited to dry land</h1>
+	Since Humboldt County is coastal, many of the earthquakes that affect us happen offshore. This was the case for the most significant earhtquake in the area in the past decade, a 6.5 magnitude west of the city of Eureka. 
+	</div>
+
+</div>
+
+<div class='text'>
+	<h1>Earthquakes were happening at all hours</h1>
+	Despite a general awareness that earthquakes were common I didn't feel that many. I thought perhaps I slept through a lot of them; however the earthquakes recorded during my 19 year timeframe were distributed remarkably evenly over every hour of the day. I was awake for an estimated 63% of those 10,091 earthquakes - nearly 2/3 of the total. 
+</div>
+
+<!-- tableau public -->
+<div class='center_aligner'>
+	<!-- insert tableau public embed link below this line -->
+	<div class='tableauPlaceholder' id='viz1607953293594' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Mo&#47;MonthlyCount-ReducedSize&#47;AwakeAsleep&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='MonthlyCount-ReducedSize&#47;AwakeAsleep' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Mo&#47;MonthlyCount-ReducedSize&#47;AwakeAsleep&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1607953293594');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} else { vizElement.style.width='100%';vizElement.style.height='727px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+</div>
+
+<div class='text'>
+	<h1>But most went unnoticed</h1>
+	Out of the 9,877 earthquake records that included magnitude data, only 5% were large enough to be felt! Additionally, 85% of the earthquakes that were potentially large enough to be felt were below a magnitude 4.0. 
+	
+</div>
+
+<div class='center_aligner'>
+	<!-- tableau public -->
+<div class='tableauPlaceholder' id='viz1607901353758' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Mo&#47;MonthlyCount-ReducedSize&#47;Magnitude&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='MonthlyCount-ReducedSize&#47;Magnitude' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Mo&#47;MonthlyCount-ReducedSize&#47;Magnitude&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1607901353758');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} else { vizElement.style.width='100%';vizElement.style.height='777px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+
+</div>
+
+
+<div class='text'>
+	<h1>So, where IS "the big one"?</h1>
+	<a href="https://www2.calstate.edu/csu-system/news/Pages/Are-You-Ready-for-The-Big-One-.aspx">According to local expert</a> Dr. Lori Dengler, the big one is "relative." For some who have lived in California for decades, maybe it's already happened. Others may be expecting that magnitude 8.0 - 9.0 quake I worried about as a kid. Dr. Dengler notes, however, that the next "big one" is likely to be an earthquake falling in the much more common 6.5 - 7.2 range. In Humboldt County, the most impactful earthquakes in the past 30 years - in <a href="https://www.khsu.org/post/shaky-ground-changing-perspectives-about-earthquakes#stream/0">1992</a> and <a href="https://www.northcoastjournal.com/NewsBlog/archives/2020/01/09/10-years-later-the-earthquake-of-2010">2010</a> - fell within that range. While larger earthquakes have been infrequent in the scheme of one Californian's lifetime, past earthquakes and the likelihood of more have spurred local and state-wide awareness raising and preparation initiatives that will be crucial if and when the next one hits. 
+</div>
+
+
+</body>
+<script type="text/javascript">
+
+// instantiate the scrollama
+const scroller = scrollama();
+const scroller2 = scrollama();
+
+scroller
+  .setup({
+    step: ".text",
+    offset: 0.9,
+  })
+  .onStepEnter(response => {
+    // { element, index, direction }
+    el=response.element;
+    el.style.opacity=1;
+    el.style.marginTop='5%';    
+  })
+  .onStepExit(response => {
+    // { element, index, direction }  
+    el=response.element;
+  })
+  ;
+ // setup resize event
+window.addEventListener("resize", scroller.resize);
+
+scroller2
+  .setup({
+    step: ".progressive",
+    offset: 0.6,
+  })
+  .onStepEnter(response => {
+    // { element, index, direction }
+    el=response.element;
+    el.style.opacity=1;
+    if(response.index==0 || 1 || 2){
+    	stick('dynamic_sticky1')
+    	response.direction=='down'
+    	if(response.index==0){
+    		count(0,0.5,.1,'Average','Earthquakes per year','dynamic_sticky1')
+    	} else if (response.index==1){
+    		count(1,10,1,'Total','From 1993-2012','dynamic_sticky1')
+    	} else if (response.index==2){
+    		count(1,3.9,.1,'Offshore Earthquakes','Or 39% of the total','dynamic_sticky1')
+    	}
+    }
+  })
+  .onStepExit(response => {
+    // { element, index, direction }  
+    el=response.element;
+    console.log(response.index)
+    if(response.index==2){
+    	unstick('dynamic_sticky1')
+    }
+    el.style.opacity=0;
+  })
+  ;
+ // setup resize event
+window.addEventListener("resize", scroller2.resize);
+
+function count(number1, number2, step, title, label, location_id, prefix='', suffix='k'){
+	target = document.querySelector('#'+location_id)
+	console.log(target)
+	let text=number1;
+
+	setInterval(function(){
+		if(text!=number2){
+			num = text+step
+			if(num % 1 == 0){
+				text = num
+			} else {
+				text = parseFloat(num.toFixed(2))
+			}
+			target.innerHTML="<div class='aligner'><h1>"+title+"</h1><div id='counter'>"+prefix+text+suffix+"</div><h2>"+label+"</h2></div>"
+		}
+	}, 30);
+}
+
+function stick(location_id){
+	target = document.querySelector('#'+location_id)
+	target.style.position="sticky"
+}
+
+function unstick(location_id){
+	target = document.querySelector('#'+location_id)
+	target.style.position="relative"
+}
+
+</script>
+
+</html>
